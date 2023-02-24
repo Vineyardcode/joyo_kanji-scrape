@@ -18,7 +18,7 @@ rows = table.find_all("tr")[1:]
 # Create a list to store the kanji
 kanji_list = []
 
-# Loop through each row and extract the kanji character and its readings
+# Loop through each row and extract the kanji character and additional info about it
 for row in rows:
     columns = row.find_all("td")
     id = columns[0].text.strip()
@@ -29,6 +29,6 @@ for row in rows:
     eng_meaning = [reading.strip() for reading in columns[7].text.split(",")]
     kanji_list.append({"id": id, "kanji": kanji, "readings": readings, "radicals": radicals, "strokes": strokes, "eng_meaning": eng_meaning})
 
-# Write the kanji list to a JSON file
+# Write the kanji list to an existing JSON file
 with open("jouyou_kanji.json", "w", encoding='utf-8') as f:
     json.dump(kanji_list, f, ensure_ascii=False, indent=4)
